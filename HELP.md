@@ -1,21 +1,18 @@
-# Criar um pad
+# Editar Pad
 
-Ao acessar a rota `/novo` o usuário logado pode cadastrar um novo pad na sua biblioteca.
+A rota `/edita/{id}` localiza e abre o "pad" para edição se:
 
-Para implementar, insira ou ajuste as partes:
+ - O usuário logado é "owner" do "pad", caso contrário, vai para `/ver/{id}`
+ - O "pad" está com `status.ON`, caso contrário, vai para `/` 
 
- - [ ] Crie `com.projetos.springpad.controller.pad.NewController.java`
- - [ ] Ajuste `src/main/resources/templates/layouts/header.html`
- - [ ] Ajuste `com.projetos.springpad.model.PadsModel.java`
- - [ ] Ajuste `src/main/resources/static/css/style.css`
- - [ ] Ajuste `src/main/resources/templates/pad/new.html`
+Ao salvar as alterações, vai para `/ver/{id}` com uma mensagem de sucesso.
 
-Em `header.html`, corrigimos o link para um novo "pad" que agora é `/novo`.
+ - [ ] Altere `src/main/resources/templates/pad/view.html`
+ - [ ] Crie `com.projetos.springpad.controller.pad.EditController`
+ - [ ] Crie `src/main/resources/templates/pad/edit.html`
 
-Os ajustes em `PadsModel.java` corrigem uma falha na inserção da data em `pad.createdAt`, mas, talvez, isso já tenha sido feito antes.
+Em `view.html` adicionamos uma caixa de alerta para as mensagens.
 
-Em `NewController` temos as duas rotas:
- - `GET /novo` exibe o formulário disponível em `new.html`;
- - `POST /novo` recebe os campos do formulário e processa o novo "pad".
+`EditController.java` controla os endpoint `GET /edita/{id}` que exibe o formulário e `POST /edita/{id}` quue processa as modificações.
 
-Em `style.css` apenas adicionamos a classe `.pad-content` para ajustar a fonte do `textarea`.
+
