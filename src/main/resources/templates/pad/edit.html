@@ -5,13 +5,11 @@ Página da rota "/edit/{pad.id}" que exibe o pad selecionado permitindo editá-l
 
 <#include "../layouts/header.html">
 
-<h2>${title}</h2>
-
 <form action="/edita/${pad.id}" method="post" class="d-flex flex-column flex-grow-1">
-    <input type="text" name="padtitle" class="form-control"
+    <input type="text" name="padtitle" class="form-control fs-4" tabindex="0"
            value="${pad.title}" required minlength="4">
 
-    <textarea name="padcontent" class="form-control pad-content flex-grow-1"
+    <textarea name="padcontent" class="form-control pad-content flex-grow-1 mt-1"
               required minlength="4">${pad.content}</textarea>
 
     <div class="mt-3">
