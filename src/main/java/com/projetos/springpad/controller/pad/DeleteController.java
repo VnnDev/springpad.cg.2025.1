@@ -7,6 +7,7 @@ package com.projetos.springpad.controller.pad;
 
 import com.projetos.springpad.model.PadsModel;
 import com.projetos.springpad.repository.PadsRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -26,38 +27,34 @@ public class DeleteController {
     public String deletePad(
             @PathVariable Long id,
             @CookieValue(value = "owner_uid", required = false) String ownerUid,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            HttpSession session // força criação da sessão
     ) {
-        // Busca o pad pelo ID
         Optional<PadsModel> optionalPad = padsRepository.findById(id);
 
-        // Se não encontrado ou status não ON, redireciona para raiz (embora delete deva lidar com isso)
         if (optionalPad.isEmpty() || optionalPad.get().getStatus() != PadsModel.Status.ON) {
             return "redirect:/";
         }
 
-        // Obtém os dados do registro
         PadsModel pad = optionalPad.get();
 
-        // Verifica se o usuário logado é o owner
         boolean isOwner = false;
         if (ownerUid != null && !ownerUid.isEmpty() && pad.getOwnerModel() != null) {
             isOwner = ownerUid.equals(pad.getOwnerModel().getUid());
         }
 
         if (!isOwner) {
-            // Não é owner: redireciona de volta para a view sem alterações
-            return "redirect:/view/" + id;
+            return "redirect:/ver/" + id;
         }
 
-        // É owner: atualiza status para DEL (soft delete)
         pad.setStatus(PadsModel.Status.DEL);
         padsRepository.save(pad);
 
-        // Adiciona mensagem flash para alert no home
-        redirectAttributes.addFlashAttribute("successMessage", "\\\"" + pad.getTitle() + "\\\" excluído com sucesso!");
+        redirectAttributes.addFlashAttribute(
+                "successMessage", pad.getTitle() + " excluído com sucesso!"
+        );
 
-        // Redireciona para raiz
         return "redirect:/";
     }
+
 }

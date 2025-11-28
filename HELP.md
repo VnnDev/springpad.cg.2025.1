@@ -9,4 +9,7 @@ Se não é o proprietário ou o "pad" não existe, redireciona para "/".
 Se apagou, redireciona para "/" com uma mensagem de sucesso.
 
  - [ ] Crie `com.projetos.springpad.controller.pad.DeleteController`
+ - [ ] Ajuste `com.projetos.springpad.controller.HomeController`
+
+
 
