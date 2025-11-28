@@ -1,15 +1,21 @@
-# Apagando um Pad
+# Criar um pad
 
-Se o usuário logado é proprietário do "pad", o botão `[Apagar]` é exibido logo abaixo da visão do "pad".
+Ao acessar a rota `/novo` o usuário logado pode cadastrar um novo pad na sua biblioteca.
 
-Ao clicar no botão, aparece a mensagem de confirmação que, se confirmado, leva a rota `/apaga/{id}` que confirma a identidade do proprietário (via cookie) e marca `status.DEL` para o registro.
+Para implementar, insira ou ajuste as partes:
 
-Se não é o proprietário ou o "pad" não existe, redireciona para "/".
+ - [ ] Crie `com.projetos.springpad.controller.pad.NewController.java`
+ - [ ] Ajuste `src/main/resources/templates/layouts/header.html`
+ - [ ] Ajuste `com.projetos.springpad.model.PadsModel.java`
+ - [ ] Ajuste `src/main/resources/static/css/style.css`
+ - [ ] Ajuste `src/main/resources/templates/pad/new.html`
 
-Se apagou, redireciona para "/" com uma mensagem de sucesso.
+Em `header.html`, corrigimos o link para um novo "pad" que agora é `/novo`.
 
- - [ ] Crie `com.projetos.springpad.controller.pad.DeleteController`
- - [ ] Ajuste `com.projetos.springpad.controller.HomeController`
+Os ajustes em `PadsModel.java` corrigem uma falha na inserção da data em `pad.createdAt`, mas, talvez, isso já tenha sido feito antes.
 
+Em `NewController` temos as duas rotas:
+ - `GET /novo` exibe o formulário disponível em `new.html`;
+ - `POST /novo` recebe os campos do formulário e processa o novo "pad".
 
-
+Em `style.css` apenas adicionamos a classe `.pad-content` para ajustar a fonte do `textarea`.
