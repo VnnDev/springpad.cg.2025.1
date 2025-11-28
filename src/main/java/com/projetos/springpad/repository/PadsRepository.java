@@ -26,7 +26,7 @@ public interface PadsRepository extends JpaRepository<PadsModel, Long> {
             "ORDER BY p.createdAt DESC")
     List<PadSummaryDTO> findSummariesByStatusOrderByCreatedAtDesc(PadsModel.Status status);
 
-    // Adicione ao interface existente
+    // Obtém os dados do Pad com o Owner
     @Query("SELECT p FROM PadsModel p LEFT JOIN FETCH p.ownerModel WHERE p.id = :id")
     Optional<PadsModel> findByIdWithOwner(@Param("id") Long id);
 }
