@@ -20,11 +20,19 @@ Página da rota "/ver/{pad.id}" que exibe o pad selecionado em detalhes.
         <div class="text-center text-sm-end mt-2 mt-sm-0">
             <a href="/" class="btn btn-primary btn-sm">Início</a>
             <#if isOwner>
+<<<<<<< Updated upstream
                 <a href="/edita/${pad.id}" class="btn btn-warning btn-sm ms-auto">Editar</a>
                 <a href="/apaga/${pad.id}" class="btn btn-danger btn-sm" onclick='return confirm(`Tem certeza que deseja apagar "${title}" permanentemente?`);'>Apagar</a>
             </#if>
         </div>
     </div>
+=======
+            <a href="/edita/${pad.id}" class="btn btn-warning btn-sm ms-auto">Editar</a>
+            <a href="/apaga/${pad.id}" class="btn btn-danger btn-sm" onclick='return confirm(`Tem certeza que deseja apagar "${title}" permanentemente?`);'>Apagar</a>
+        </#if>
+    </div>
+</div>
+>>>>>>> Stashed changes
 </div>
 
 <#-- Feedback de sucesso (cadastro, edição, exclusão etc.) -->

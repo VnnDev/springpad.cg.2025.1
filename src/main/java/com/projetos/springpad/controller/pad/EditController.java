@@ -104,4 +104,8 @@ public class EditController {
 
         return "redirect:/ver/" + id;
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
