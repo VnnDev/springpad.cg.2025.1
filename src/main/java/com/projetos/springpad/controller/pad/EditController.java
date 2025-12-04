@@ -4,7 +4,6 @@
 
 package com.projetos.springpad.controller.pad;
 
-import com.projetos.springpad.model.OwnerModel;
 import com.projetos.springpad.model.PadsModel;
 import com.projetos.springpad.repository.OwnerRepository;
 import com.projetos.springpad.repository.PadsRepository;
@@ -83,29 +82,33 @@ public class EditController {
             return "redirect:/ver/" + id;
         }
 
-        // sanitização simples
+        // Sanitização simples
         String sanitizedTitle = HtmlUtils.htmlEscape(title.trim());
         String sanitizedContent = HtmlUtils.htmlEscape(content.trim());
 
+        // Se o título está vazio
         if (sanitizedTitle.isEmpty()) {
+            // Recarrega o formulário
             return "redirect:/edita/" + id;
         }
 
-        // aplica alterações
+        // Aplica alterações
         pad.setTitle(sanitizedTitle);
         pad.setContent(sanitizedContent);
-
         padsRepository.save(pad);
 
+        /*
+        // Cria mensagem de confirmação
         redirectAttributes.addFlashAttribute(
                 "successMessage",
                 sanitizedTitle + " atualizado com sucesso!"
         );
+        */
 
+        redirectAttributes.addFlashAttribute("flashMessage", sanitizedTitle + " atualizado com sucesso!");
+        redirectAttributes.addFlashAttribute("flashStyle", "success");  // success, danger, warning, info etc.
+
+        // Redireciona para a visão d pad editado
         return "redirect:/ver/" + id;
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
